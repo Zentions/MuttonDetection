@@ -80,14 +80,13 @@ public class MainActivity extends AppCompatActivity {
         preprocessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(imagePath==null) return;
-                double [] a = {0.971934,0.042001,2.006766,63.552752,14.826509,16.234356,0.046106,0.406729,0.36819,140.156456,80.087101,61.422068};
-                try {
-                    InputStream reader = getResources().getAssets().open("bp.model");
-                    String label = TestWekaJar.predictOneStance(a,reader);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(imagePath==null) {
+                    Toast.makeText(MainActivity.this,"图片未上传！",Toast.LENGTH_SHORT);
+                    return;
                 }
+                Intent intent = new Intent(MainActivity.this,Preprocess.class);
+                intent.putExtra("path",imagePath);
+                startActivity(intent);
             }
         });
         img.setOnClickListener(new View.OnClickListener() {
